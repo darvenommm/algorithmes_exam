@@ -1,3 +1,5 @@
+# Проверить, является ли число a простым.
+
 from math import sqrt, floor
 
 def is_prime(number: int) -> bool:

@@ -1,3 +1,5 @@
+# Реализуйте алгоритм быстрого возведения числа a в степень b.
+
 def fast_power(number: int, power: int) -> int:
     current_power: int = power
     multi: int = number

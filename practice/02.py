@@ -1,3 +1,6 @@
+# Даны два числа a и b, представленные в виде строк.
+# Найдите произведение этих чисел и верните его в виде строки.
+
 # TODO It can be written better
 
 # private
@@ -63,6 +66,6 @@ def multiply_numbers(first_number: str, second_number: str) -> str:
 
     return result
 
-adding = add_big_numbers('1234', '9234')
-multiply = multiply_big_number_and_small(adding, '9')
-print(multiply_numbers('34543534', '345345345345345435'))
+# adding = add_big_numbers('1234', '9234')
+# multiply = multiply_big_number_and_small(adding, '9')
+# print(multiply_numbers('34543534', '345345345345345435'))

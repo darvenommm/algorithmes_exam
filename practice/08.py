@@ -1,6 +1,6 @@
 # Найти количество простых чисел в диапазоне от [0, n].
 
-# Тут, кста, используется алгоритм Евклида
+# Тут, кста, используется решето Эратосфена
 
 def find_count_of_prime_number(end: int) -> int:
     if end < 2:
@@ -22,5 +22,5 @@ def find_count_of_prime_number(end: int) -> int:
     return count
 
 
-for number in range(25, 50):
-    print(number, find_count_of_prime_number(number))
+# for number in range(25, 50):
+#     print(number, find_count_of_prime_number(number))
