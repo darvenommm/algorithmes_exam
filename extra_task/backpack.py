@@ -1,3 +1,5 @@
+# задача на заполнения портфеля
+
 # Норм обьяснение https://youtu.be/S2eVYez_j58?si=5hmjrnvmX7tGAkAF&t=4149
 
 def max_cost(capacity: int, weights: list[int], costs: list[int]) -> int:
@@ -19,7 +21,7 @@ def max_cost(capacity: int, weights: list[int], costs: list[int]) -> int:
                     cache[thing_index][capacity_value],
                     costs[thing_index] + cache[thing_index][capacity_value - weights[thing_index]]
                 )
-                cache[thing_index + 1][capacity_value] = new_value\
+                cache[thing_index + 1][capacity_value] = new_value
 
     return cache[-1][-1]
 
