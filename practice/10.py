@@ -17,4 +17,4 @@ def count_swipes_in_insertion_sort(array: list[int]) -> int:
     return count
 
 
-print(count_swipes_in_insertion_sort([5, 3, 4, 2, 7]))
+# print(count_swipes_in_insertion_sort([5, 3, 4, 2, 7]))
