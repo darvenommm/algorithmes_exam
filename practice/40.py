@@ -1,4 +1,5 @@
-# Реализую бинарное дерево через массив, а не объекты, тк это эффективнее по памяти
+# Дано бинарное дерево. Найти высоту дерева.
+
 class BinaryTree:
     START_INDEX = 1
 
@@ -14,11 +15,7 @@ class BinaryTree:
             return self.elements.append(new_element)
 
         def inner(parent_index: int) -> None:
-            parent = self.get_element(parent_index)
-
-            if not parent:
-                return
-
+            parent: int = self.get_element(parent_index) # type: ignore
             left_index = self.get_left_index(parent_index)
             right_index = self.get_right_index(parent_index)
             (left, right) = self.get_children(parent_index)
@@ -73,11 +70,28 @@ class BinaryTree:
         elements: list[str] = [str(element) for element in self.elements]
         return ' | '.join(elements)
 
+    @property
+    def height(self) -> int:
+        def inner(parent_index: int) -> int:
+            parent = self.get_element(parent_index)
 
-# if __name__ == '__main__':
-    # tree = BinaryTree()
+            if parent is None:
+                return 0
 
-    # for element in (52, 4, 6, 2, 0, -4, 5, 78):
-    #     tree.add_element(element)
+            left_index = self.get_left_index(parent_index)
+            right_index = self.get_right_index(parent_index)
 
-    # tree.print()
+            left_height = inner(left_index)
+            right_height = inner(right_index)
+
+            return max(left_height, right_height) + 1
+
+        return inner(self.START_INDEX)
+
+
+# tree = BinaryTree()
+
+# for element in (52, 54, 56, 58, 60):
+#     tree.add_element(element)
+
+# print(tree.height)

@@ -1,97 +1,50 @@
 # Дано бинарное дерево. Проверить является ли данное дерево бинарным деревом поиска.
 
 
-class BinaryTree:
+from collections import deque
+
+
+def is_correct_binary_tree(tree: list[int | None]) -> bool:
     START_INDEX = 1
 
-    def __init__(self) -> None:
-        self.elements: list[int | None] = [None]
+    match tree:
+        case []:
+            return True
+        case [element]:
+            return element is None
 
-    @property
-    def count(self) -> int:
-        return len(self.elements)
+    indexes_stack = deque[int]((START_INDEX,))
 
-    def add_element(self, new_element: int) -> None:
-        if self.count == 1:
-            return self.elements.append(new_element)
+    while indexes_stack:
+        parent_index = indexes_stack.pop()
+        parent = tree[parent_index]
 
-        def inner(parent_index: int) -> None:
-            parent: int = self.get_element(parent_index) # type: ignore
-            left_index = self.get_left_index(parent_index)
-            right_index = self.get_right_index(parent_index)
-            (left, right) = self.get_children(parent_index)
+        left_index = parent_index * 2
+        right_index = parent_index * 2 + 1
 
-            is_new_element_bigger = new_element > parent
+        left = tree[left_index] if len(tree) > left_index else None
+        right = tree[right_index] if len(tree) > right_index else None
 
-            if (not left) and (not is_new_element_bigger):
-                return self.set_new_elements(new_element, left_index)
+        is_left_existed = left is not None
+        is_right_existed = right is not None
 
-            if (not right) and is_new_element_bigger:
-                return self.set_new_elements(new_element, right_index)
+        if is_left_existed and left >= parent: #  type: ignore[operator]
+            return False
+        if is_right_existed and right < parent: #  type: ignore[operator]
+            return False
 
-            if left and (not is_new_element_bigger):
-                return inner(left_index)
+        if is_left_existed:
+            indexes_stack.append(left_index) #  type: ignore[arg-type]
+        if is_right_existed:
+            indexes_stack.append(right_index) #  type: ignore[arg-type]
 
-            if right and is_new_element_bigger:
-                return inner(right_index)
-
-        inner(self.START_INDEX)
-
-    def get_element(self, element_index: int) -> int | None:
-        if not (self.START_INDEX <= element_index < self.count):
-            return None
-
-        return self.elements[element_index]
-
-    def set_new_elements(self, new_element: int, index: int) -> None:
-        while self.count < index + 1:
-            self.elements.append(None)
-
-        self.elements[index] = new_element
-
-    def get_left_index(self, parent_index: int) -> int:
-        return parent_index * 2
-
-    def get_right_index(self, parent_index: int) -> int:
-        return parent_index * 2 + 1
-
-    def get_left(self, parent_index: int) -> int | None:
-        return self.get_element(self.get_left_index(parent_index))
-
-    def get_right(self, parent_index: int) -> int | None:
-        return self.get_element(self.get_right_index(parent_index))
-
-    def get_children(self, parent_index: int) -> tuple[int | None, int | None]:
-        return (self.get_left(parent_index), self.get_right(parent_index))
-
-    def print(self) -> None:
-        print(str(self))
-
-    def __str__(self) -> str:
-        elements: list[str] = [str(element) for element in self.elements]
-        return ' | '.join(elements)
-
-    def get_height(self) -> int:
-        def inner(parent_index: int) -> int:
-            parent = self.get_element(parent_index)
-
-            if parent is None:
-                return 0
-
-            left_index = self.get_left_index(parent_index)
-            right_index = self.get_right_index(parent_index)
-
-            left_height = inner(left_index)
-            right_height = inner(right_index)
-
-            return max(left_height, right_height) + 1
-
-        return inner(self.START_INDEX)
+    return True
 
 
-# tree = BinaryTree()
+# print(is_correct_binary_tree([]))
+# print(is_correct_binary_tree([None]))
+# print(is_correct_binary_tree([None, 50]))
+# print(is_correct_binary_tree([None, 50, 25, 75, 12, 27, 67, 100]))
+# print(is_correct_binary_tree([None, 50, 25, 75, 12, None, 67, None]))
 
-# for element in (52, 54, 56, 58, 60):
-#     tree.add_element(element)
-
-# print(tree.get_height())
+# print(is_correct_binary_tree([3]))

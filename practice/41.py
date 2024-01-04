@@ -1,4 +1,8 @@
-# Реализую бинарное дерево через массив, а не объекты, тк это эффективнее по памяти
+# Дано бинарное дерево. Найти ширину дерева.
+
+from collections import deque
+
+
 class BinaryTree:
     START_INDEX = 1
 
@@ -73,11 +77,36 @@ class BinaryTree:
         elements: list[str] = [str(element) for element in self.elements]
         return ' | '.join(elements)
 
+    @property
+    def width(self) -> int:
+        max_width = 0
 
-# if __name__ == '__main__':
-    # tree = BinaryTree()
+        if self.count < 2:
+            return 0
 
-    # for element in (52, 4, 6, 2, 0, -4, 5, 78):
-    #     tree.add_element(element)
+        indexes_queue = deque[int]((self.START_INDEX,))
 
-    # tree.print()
+        while indexes_queue:
+            max_width = max(max_width, len(indexes_queue))
+
+            for _ in range(len(indexes_queue)):
+                current_index = indexes_queue.popleft()
+
+                left_index = self.get_left_index(current_index)
+                right_index = self.get_right_index(current_index)
+                (left, right) = self.get_children(current_index)
+
+                if left is not None:
+                    indexes_queue.append(left_index)
+                if right is not None:
+                    indexes_queue.append(right_index)
+
+        return max_width
+
+
+# tree = BinaryTree()
+
+# for element in (52, 4, 78, 2, 6, 123, -4, 5, 123, 3343, 76, 77, 75):
+#     tree.add_element(element)
+
+# print(tree.width)
