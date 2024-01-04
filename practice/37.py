@@ -1,7 +1,9 @@
 # Дано бинарное дерево. Выполнить прямой/центрированный/обратный/уровневый обход дерева.
 # https://github.com/zernovga/Algorithms_and_Data_Structures_Course/blob/main/Lections/Lection_11.pdf
 
+
 from collections import deque
+
 
 class BinaryTree:
     START_INDEX = 1
@@ -78,10 +80,7 @@ class BinaryTree:
     def get_pre_order(self) -> list[int]:
         result: list[int] = []
 
-        def inner(parent_index: int | None) -> None:
-            if parent_index is None:
-                return
-
+        def inner(parent_index: int) -> None:
             parent = self.get_element(parent_index)
             left_index = self.get_left_index(parent_index)
             right_index = self.get_right_index(parent_index)
@@ -102,10 +101,7 @@ class BinaryTree:
     def get_in_order(self) -> list[int]:
         result: list[int] = []
 
-        def inner(parent_index: int | None) -> None:
-            if parent_index is None:
-                return
-
+        def inner(parent_index: int) -> None:
             parent = self.get_element(parent_index)
             left_index = self.get_left_index(parent_index)
             right_index = self.get_right_index(parent_index)
@@ -126,10 +122,7 @@ class BinaryTree:
     def get_post_order(self) -> list[int]:
         result: list[int] = []
 
-        def inner(parent_index: int | None) -> None:
-            if parent_index is None:
-                return
-
+        def inner(parent_index: int) -> None:
             parent = self.get_element(parent_index)
             left_index = self.get_left_index(parent_index)
             right_index = self.get_right_index(parent_index)
@@ -172,7 +165,7 @@ class BinaryTree:
 
 
 
-# tree = BinaryTree()
+tree = BinaryTree()
 
 # for element in (52, 4, 6, 2, 0, -4, 5, 78, 123, 122, 3343):
 #     tree.add_element(element)
