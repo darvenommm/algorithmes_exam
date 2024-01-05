@@ -24,4 +24,4 @@ def find_index(array: list[int], number: int) -> int:
     return left_pointer
 
 
-# print(find_index([1, 2, 3, 3, 3, 3, 3, 4, 4, 5, 6], 6))
+print(find_index([1, 2, 10, 14, 34, 65, 106], 34))
