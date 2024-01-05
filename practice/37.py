@@ -165,7 +165,7 @@ class BinaryTree:
 
 
 
-tree = BinaryTree()
+# tree = BinaryTree()
 
 # for element in (52, 4, 6, 2, 0, -4, 5, 78, 123, 122, 3343):
 #     tree.add_element(element)
