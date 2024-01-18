@@ -29,7 +29,7 @@ def z_function_improved(string: str) -> list[int]:
     for index in range(1, length):
         # Если index в промежутке [left_pointer, right_pointer]
         if index < right_pointer:
-            # объяснение формулы (Оно понятно) ↓
+            # объяснение формулы (Его реально осилить) ↓
             # https://e-maxx.ru/algo/z_function
             # Вкратце, 1 -> Если вылазит, 2 -> одинаковые значения
             result[index] = min(right_pointer - index, result[index - left_pointer])
@@ -49,7 +49,7 @@ def z_function_improved(string: str) -> list[int]:
 def find_index(text: str, pattern: str) -> int:
     z_values: list[int] = z_function_improved(pattern + '~' + text)
 
-    for index in range(len(pattern) + 1, len(text) + len(pattern) + 2):
+    for index in range(len(pattern) + 1, len(text) + len(pattern) + 1):
         if z_values[index] == len(pattern):
             return index - len(pattern) - 1
 
@@ -58,4 +58,4 @@ def find_index(text: str, pattern: str) -> int:
 # for string in ('aaaaa', 'aaabaab', 'abacaba', 'abcabc'):
 #     print(z_function_improved(string))
 
-print(find_index('aaaa, dfdfd, asdfasdf, 34', '34'))
+# print(find_index('aaaa, dfdfd, asdfasdf, 3423', '34'))
