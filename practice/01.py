@@ -11,12 +11,11 @@ def convert(number: int, base: int) -> str:
 
     result: str = ''
 
-    while True:
-        result += str(number % base)
+    while number > 0:
+        result = str(number % base) + result
         number = number // base
 
-        if number < base:
-            return ('-' if is_negative else '') + str(number) + result
+    return f'-{result}' if is_negative else result
 
 def main(first_number: int, second_number: int, base: int) -> str:
     sum_numbers: int = first_number + second_number
@@ -24,4 +23,4 @@ def main(first_number: int, second_number: int, base: int) -> str:
     return convert(sum_numbers, base)
 
 
-# print(main(12, 4, 4))
+# print(main(-21, -4, 4))
